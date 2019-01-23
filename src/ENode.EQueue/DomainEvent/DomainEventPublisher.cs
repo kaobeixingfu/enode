@@ -29,6 +29,7 @@ namespace ENode.EQueue
             _sendMessageService = new SendQueueMessageService();
             return this;
         }
+
         public DomainEventPublisher InitializeEQueue(ProducerSetting setting = null)
         {
             InitializeENode();

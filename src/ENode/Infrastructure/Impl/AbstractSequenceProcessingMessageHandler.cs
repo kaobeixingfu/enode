@@ -41,8 +41,7 @@ namespace ENode.Infrastructure.Impl
             var message = processingMessage.Message;
 
             _ioHelper.TryAsyncActionRecursively("GetPublishedVersionAsync",
-            () => _publishedVersionStore.GetPublishedVersionAsync(Name, message.AggregateRootTypeName, message.AggregateRootStringId),
-            currentRetryTimes => HandleMessageAsync(processingMessage, currentRetryTimes),
+            () => _publishedVersionStore.GetPublishedVersionAsync(Name, message.AggregateRootTypeName, message.AggregateRootStringId),currentRetryTimes => HandleMessageAsync(processingMessage, currentRetryTimes),
             result =>
             {
                 var publishedVersion = result.Data;
@@ -70,8 +69,7 @@ namespace ENode.Infrastructure.Impl
         private void DispatchProcessingMessageAsync(X processingMessage, int retryTimes)
         {
             _ioHelper.TryAsyncActionRecursively("DispatchProcessingMessageAsync",
-            () => DispatchProcessingMessageAsync(processingMessage),
-            currentRetryTimes => DispatchProcessingMessageAsync(processingMessage, currentRetryTimes),
+            () => DispatchProcessingMessageAsync(processingMessage),currentRetryTimes => DispatchProcessingMessageAsync(processingMessage, currentRetryTimes),
             result =>
             {
                 UpdatePublishedVersionAsync(processingMessage, 0);

@@ -10,7 +10,6 @@ namespace ENode.Infrastructure.Impl
         IMessagePublisher<IPublishableException>
     {
         private static Task<AsyncTaskResult> _successResultTask = Task.FromResult(AsyncTaskResult.Success);
-
         public Task<AsyncTaskResult> PublishAsync(DomainEventStreamMessage message)
         {
             return _successResultTask;
